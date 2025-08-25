@@ -1,6 +1,13 @@
-# Esquema de Banco de Dados NoSQL para Aplicação de Consumo de Vídeos Online
+# Atividades de Modelagem de Banco de Dados NoSQL
 
-## 1. Tipo de Banco de Dados NoSQL Recomendado
+Este repositório contém a entrega das duas atividades propostas sobre modelagem de banco de dados **NoSQL**.  
+Cada atividade apresenta um cenário distinto, com justificativas, esquemas de coleções e diagramas.
+
+---
+
+## 📌 Atividade 1 - Esquema de Banco de Dados NoSQL para Aplicação de Consumo de Vídeos Online
+
+### 1. Tipo de Banco de Dados NoSQL Recomendado
 O tipo de banco de dados **NoSQL orientado a documentos (MongoDB)** é o mais recomendado para este cenário.  
 
 **Motivos:**
@@ -11,9 +18,9 @@ O tipo de banco de dados **NoSQL orientado a documentos (MongoDB)** é o mais re
 
 ---
 
-## 2. Estrutura das Coleções (MongoDB)
+### 2. Estrutura das Coleções (MongoDB)
 
-### **Coleção: users**
+#### **Coleção: users**
 ```json
 {
   "_id": "u123",
@@ -24,7 +31,7 @@ O tipo de banco de dados **NoSQL orientado a documentos (MongoDB)** é o mais re
 }
 ```
 
-### **Coleção: videos**
+#### **Coleção: videos**
 ```json
 {
   "_id": "v987",
@@ -37,7 +44,7 @@ O tipo de banco de dados **NoSQL orientado a documentos (MongoDB)** é o mais re
 }
 ```
 
-### **Coleção: categories**
+#### **Coleção: categories**
 ```json
 {
   "_id": "c10",
@@ -46,7 +53,7 @@ O tipo de banco de dados **NoSQL orientado a documentos (MongoDB)** é o mais re
 }
 ```
 
-### **Coleção: history**
+#### **Coleção: history**
 ```json
 {
   "_id": "h555",
@@ -59,9 +66,9 @@ O tipo de banco de dados **NoSQL orientado a documentos (MongoDB)** é o mais re
 
 ---
 
-## 3. Modelo Relacional (NoSQL)
+### 3. Modelo Relacional (NoSQL)
 
-### Representação Textual
+#### Representação Textual
 ```
 [Users] --------< [History] >-------- [Videos] --------< [Categories]
 ```
@@ -70,7 +77,7 @@ O tipo de banco de dados **NoSQL orientado a documentos (MongoDB)** é o mais re
 - **Videos** (1:N) **History**  
 - **Videos** (N:N) **Categories**  
 
-### Representação em Mermaid
+#### Representação em Mermaid
 ```mermaid
 erDiagram
     USERS ||--o{ HISTORY : "possui"
@@ -112,7 +119,95 @@ erDiagram
 
 ---
 
-## 4. Justificativa
+### 4. Justificativa
 - O **MongoDB** foi escolhido por sua flexibilidade e suporte a grandes volumes de dados multimídia.  
 - O **histórico** é separado em uma coleção própria para garantir escalabilidade e auditoria.  
 - A relação **N:N entre vídeos e categorias** é facilmente representada por arrays ou referências.  
+
+---
+
+## 📌 Atividade 1 - MongoDB com Dataset Netflix
+
+## 🎯 Objetivo
+O objetivo desta atividade é trabalhar com o banco de dados **MongoDB** utilizando um dataset real (Netflix) para explorar consultas básicas e compreender melhor como funciona o modelo **NoSQL – Documento**.
+
+---
+
+## 📂 Dataset Utilizado
+Arquivo importado: `netflix_titles.csv`
+
+Local do arquivo no computador:  
+`C:\Users\alexa\OneDrive\Área de Trabalho\N1-PredictiveAnalysis\netflix_titles.csv`
+
+### Estrutura do CSV
+Exemplo de colunas do dataset:
+- `show_id`
+- `type`
+- `title`
+- `director`
+- `cast`
+- `country`
+- `date_added`
+- `release_year`
+- `rating`
+- `duration`
+- `listed_in`
+- `description`
+
+---
+
+## ⚙️ Passos Executados
+
+1. Criado cluster no **MongoDB Atlas** (banco online).
+2. Importado o arquivo CSV utilizando o comando:
+
+   ```bash
+   mongoimport --uri "<STRING_DE_CONEXÃO>"      --collection filmes      --type csv      --headerline      --file "C:\Users\alexa\OneDrive\Área de Trabalho\N1-PredictiveAnalysis\netflix_titles.csv"
+   ```
+
+3. Verificação da importação no banco:
+
+   ```js
+   db.filmes.countDocuments()
+   ```
+
+---
+
+## 🔍 Exemplos de Consultas Realizadas
+
+### 1. Buscar todos os filmes adicionados em 2021
+```js
+db.filmes.find({ release_year: 2021 })
+```
+
+### 2. Buscar apenas documentários
+```js
+db.filmes.find({ listed_in: /Documentaries/ })
+```
+
+### 3. Buscar filmes ou séries do **Brasil**
+```js
+db.filmes.find({ country: "Brazil" })
+```
+
+### 4. Buscar títulos com classificação **TV-MA**
+```js
+db.filmes.find({ rating: "TV-MA" })
+```
+
+### 5. Contar quantos filmes existem no dataset
+```js
+db.filmes.countDocuments({ type: "Movie" })
+```
+
+---
+
+## 📸 Evidências
+👉 Cole aqui os **prints das consultas realizadas** no MongoDB Compass ou Shell.
+
+---
+
+## 📌 Conclusão
+- Foi possível importar o dataset Netflix para o MongoDB Atlas com sucesso.  
+- Foram executadas consultas básicas para explorar os dados.  
+- A atividade demonstrou como o MongoDB é flexível ao lidar com dados semi-estruturados.  
