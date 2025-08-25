@@ -126,7 +126,7 @@ erDiagram
 
 ---
 
-## 📌 Atividade 1 - MongoDB com Dataset Netflix
+# 📌 Atividade 2 - MongoDB com Dataset Netflix
 
 ## 🎯 Objetivo
 O objetivo desta atividade é trabalhar com o banco de dados **MongoDB** utilizando um dataset real (Netflix) para explorar consultas básicas e compreender melhor como funciona o modelo **NoSQL – Documento**.
