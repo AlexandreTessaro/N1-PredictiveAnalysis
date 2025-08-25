@@ -61,13 +61,54 @@ O tipo de banco de dados **NoSQL orientado a documentos (MongoDB)** é o mais re
 
 ## 3. Modelo Relacional (NoSQL)
 
+### Representação Textual
 ```
 [Users] --------< [History] >-------- [Videos] --------< [Categories]
 ```
 
 - **Users** (1:N) **History**  
 - **Videos** (1:N) **History**  
-- **Videos** (N:N) **Categories**
+- **Videos** (N:N) **Categories**  
+
+### Representação em Mermaid
+```mermaid
+erDiagram
+    USERS ||--o{ HISTORY : "possui"
+    VIDEOS ||--o{ HISTORY : "é assistido em"
+    VIDEOS ||--o{ CATEGORIES : "classificado em"
+
+    USERS {
+        string _id
+        string name
+        string email
+        string password_hash
+        date created_at
+    }
+
+    VIDEOS {
+        string _id
+        string title
+        string description
+        string url_stream
+        string[] categories
+        int duration
+        date uploaded_at
+    }
+
+    CATEGORIES {
+        string _id
+        string name
+        string description
+    }
+
+    HISTORY {
+        string _id
+        string user_id
+        string video_id
+        date watched_at
+        float progress
+    }
+```
 
 ---
 
