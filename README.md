@@ -202,11 +202,6 @@ db.filmes.countDocuments({ type: "Movie" })
 
 ---
 
-## 📸 Evidências
-👉 Cole aqui os **prints das consultas realizadas** no MongoDB Compass ou Shell.
-
----
-
 ## 📌 Conclusão
 - Foi possível importar o dataset Netflix para o MongoDB Atlas com sucesso.  
 - Foram executadas consultas básicas para explorar os dados.  
